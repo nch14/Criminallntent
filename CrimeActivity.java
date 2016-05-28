@@ -5,11 +5,14 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.UUID;
+
 public class CrimeActivity extends SingleFragmentActivity {
 
 
     @Override
     protected Fragment creatFragment() {
-        return new CrimeFragment();
+        UUID crimeID=(UUID)getIntent().getSerializableExtra(CrimeFragment.EXTRA_CRIME_ID);
+        return CrimeFragment.newInstance(crimeID);
     }
 }

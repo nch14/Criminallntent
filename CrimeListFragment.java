@@ -1,6 +1,7 @@
 package com.chenh.criminallntent;
 
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,7 +24,11 @@ public class CrimeListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         // Crime c=(Crime)(getListAdapter()).getItem(position);
         Crime c=((CrimeAdapter)getListAdapter()).getItem(position);
-        Log.d(TAG,c.getmTitle()+"was Clicked");
+        //Log.d(TAG,c.getmTitle()+"was Clicked");
+
+        Intent i=new Intent(getActivity(),CrimeActivity.class);
+        i.putExtra(CrimeFragment.EXTRA_CRIME_ID,c.getmId());
+        startActivity(i);
     }
 
     @Override
@@ -59,5 +64,10 @@ public class CrimeListFragment extends ListFragment {
             solvedCheckBox.setChecked(c.ismSolved());
             return convertView;
         }
+    }
+
+    public void onResume(){
+        super.onResume();
+        ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
     }
 }
